@@ -1,0 +1,50 @@
+<div class="container mt-4">
+    <h2>Crear Nota</h2>
+
+    <form [formGroup]="form" (ngSubmit)="guardarNota()" class="mb-4">
+        <div class="mb-3">
+            <label>Categoría</label>
+            <select class="form-select" formControlName="categoria">
+                <option value="">Seleccione</option>
+                <option *ngFor="let cat of categorias" [value]="cat">{{ cat }}</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label>Nombre</label>
+            <input type="text" class="form-control" formControlName="nombre" />
+        </div>
+
+        <div class="mb-3">
+            <label>Contenido</label>
+            <textarea class="form-control" rows="4" formControlName="contenido"></textarea>
+        </div>
+
+        <button class="btn btn-primary" [disabled]="form.invalid">Guardar Nota</button>
+    </form>
+
+    <h3>Notas Guardadas</h3>
+
+    <table class="table table-striped table-bordered" *ngIf="notas.length > 0">
+        <thead class="table-light">
+            <tr>
+                <th>Categoría</th>
+                <th>Nombre</th>
+                <th>Contenido</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let nota of notas; let i = index">
+                <td>{{ nota.categoria }}</td>
+                <td>{{ nota.nombre }}</td>
+                <td>{{ nota.contenido }}</td>
+                <td>
+                    <button class="btn btn-danger btn-sm" (click)="eliminarNota(i)">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p *ngIf="notas.length === 0">No hay notas guardadas.</p>
+</div>
