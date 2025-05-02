@@ -40,7 +40,14 @@ export class NotasComponent implements OnInit {
   }
 
   eliminarNota(index: number): void {
-    this.notas.splice(index, 1);
-    localStorage.setItem('notas', JSON.stringify(this.notas));
+    const confirmacion = window.confirm(
+      '¿Estás seguro de que deseas eliminar esta nota?'
+    );
+
+    if (confirmacion) {
+      this.notas.splice(index, 1);
+      localStorage.setItem('notas', JSON.stringify(this.notas));
+      alert('Nota eliminada correctamente.');
+    }
   }
 }

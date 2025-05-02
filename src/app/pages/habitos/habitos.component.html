@@ -1,0 +1,28 @@
+<div class="container">
+    <h2>Gestión de Hábitos</h2>
+
+    <div class="form">
+        <input type="text" [(ngModel)]="nuevoHabito" placeholder="Nombre del hábito" />
+        <button (click)="crearHabito()">Crear Hábito</button>
+        <button (click)="reiniciarHabitos()">Reiniciar Hábitos</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Hábito</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let h of habitos; let i = index">
+                <td>{{ h.nombre }}</td>
+                <td>{{ h.completado ? 'Completado' : 'Pendiente' }}</td>
+                <td>
+                    <button [disabled]="h.completado" (click)="completarHabito(i)">✔ Completar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
